@@ -5,16 +5,16 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from scipy.stats import norm
 
-x_tr_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\AI\428\Initial_parameter_training_x.xlsx', header = None)
+x_tr_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_training_x.xlsx', header = None)
 X_Train = np.array(x_tr_data)
 
-x_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\AI\428\Initial_parameter_test_x.xlsx', header = None) 
+x_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_test_x.xlsx', header = None) 
 X_Veri = np.array(x_veri_data)
 
-y_train_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\AI\428\Initial_parameter_training_y.xlsx', header = None) 
+y_train_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_training_y.xlsx', header = None) 
 y_Train = np.array(y_train_data)
 
-y_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\AI\428\Initial_parameter_test_y.xlsx', header = None) 
+y_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_test_y.xlsx', header = None) 
 y_Veri = np.array(y_veri_data)
 
 
