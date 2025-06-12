@@ -1,21 +1,22 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
 from scipy.stats import norm
 
 # Import data
-x_tr_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_training_x.xlsx', header = None)
+x_tr_data = pd.read_excel(r'location', header = None)
 X_Train = np.array(x_tr_data)
 
-x_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_test_x.xlsx', header = None) 
+x_veri_data = pd.read_excel(r'location', header = None) 
 X_Veri = np.array(x_veri_data)
 
-y_train_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_training_y.xlsx', header = None) 
+y_train_data = pd.read_excel(r'location', header = None) 
 y_Train = np.array(y_train_data)
 
-y_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\750_new\Initial_parameter_test_y.xlsx', header = None) 
+y_veri_data = pd.read_excel(r'location', header = None) 
 y_Veri = np.array(y_veri_data)
+
 
 
 confidence_level = 0.95
@@ -37,14 +38,14 @@ y_Veri_scaled = np.column_stack((
     scaler_velo.transform(y_Veri[:, 1].reshape(-1, 1)).ravel(),
 ))
 
-# Initialize Decision Tree Regressor
-dt_regressor = DecisionTreeRegressor(random_state=42)
+# Initialize K-Nearest Neighbors Regressor
+knn_regressor = KNeighborsRegressor(n_neighbors=5) 
 
-# Train the Decision Tree model on the scaled target data
-dt_regressor.fit(X_Train, y_Train_scaled)
+# Train the KNN model
+knn_regressor.fit(X_Train, y_Train_scaled)
 
 # Predict on the validation set
-y_pred_scaled = dt_regressor.predict(X_Veri)
+y_pred_scaled = knn_regressor.predict(X_Veri)
 
 # Inverse scale the predictions back to original scale
 y_pred = np.column_stack((

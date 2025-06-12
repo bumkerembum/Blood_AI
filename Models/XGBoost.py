@@ -1,19 +1,20 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import Lasso
+import xgboost as xgb
 from scipy.stats import norm
 
-x_tr_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\450_new\Initial_parameter_training_x.xlsx', header = None)
+# Import data
+x_tr_data = pd.read_excel(r'location', header = None)
 X_Train = np.array(x_tr_data)
 
-x_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\450_new\Initial_parameter_test_x.xlsx', header = None) 
+x_veri_data = pd.read_excel(r'location', header = None) 
 X_Veri = np.array(x_veri_data)
 
-y_train_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\450_new\Initial_parameter_training_y.xlsx', header = None) 
+y_train_data = pd.read_excel(r'location', header = None) 
 y_Train = np.array(y_train_data)
 
-y_veri_data = pd.read_excel(r'C:\Users\Gaming\Desktop\Ders\Damar Tıkanıklığı\Damar_AI\450_new\Initial_parameter_test_y.xlsx', header = None) 
+y_veri_data = pd.read_excel(r'location', header = None) 
 y_Veri = np.array(y_veri_data)
 
 
@@ -36,14 +37,14 @@ y_Veri_scaled = np.column_stack((
     scaler_velo.transform(y_Veri[:, 1].reshape(-1, 1)).ravel(),
 ))
 
-# Initialize Lasso model with a fixed alpha value 
-lasso = Lasso(alpha=1)
+# Initialize XGBoost Regressor
+xg_regressor = xgb.XGBRegressor(objective='reg:squarederror', n_estimators=100, random_state=42)
 
-# Train the Lasso Regression model on the scaled target data
-lasso.fit(X_Train, y_Train_scaled)
+# Train the XGBoost model
+xg_regressor.fit(X_Train, y_Train_scaled)
 
 # Predict on the validation set
-y_pred_scaled = lasso.predict(X_Veri)
+y_pred_scaled = xg_regressor.predict(X_Veri)
 
 # Inverse scale the predictions back to original scale
 y_pred = np.column_stack((
